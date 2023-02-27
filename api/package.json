@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
+    "test": "npx tsc && node dist/test.js",
     "dev": "npx tsc && node dist/server.js"
   },
   "keywords": [],
