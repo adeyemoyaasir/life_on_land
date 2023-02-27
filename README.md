@@ -1,6 +1,6 @@
-# life_on_land
+# Life on land
 
-ntroducing the Life on Land Emergency Response Project - a humanitarian initiative dedicated to supporting and aiding individuals, communities, and countries affected by natural disasters and other life-threatening events on land.
+Introducing the Life on Land Emergency Response Project - a humanitarian initiative dedicated to supporting and aiding individuals, communities, and countries affected by natural disasters and other life-threatening events on land.
 
 This project seeks to provide critical resources, including food, shelter, medical supplies, and other essential materials, to those in need, regardless of their location or circumstance. Through the generous support of sponsors and donors, the Life on Land Emergency Response Project aims to ensure that those affected by natural disasters receive the assistance they need to recover and rebuild their lives.
 
