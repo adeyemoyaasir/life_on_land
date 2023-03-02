@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity  >=0.7.0 <0.9.0;
 
-contract cast_votes {
+contract CastVotes {
     
     struct Voter {
         bool voted;
