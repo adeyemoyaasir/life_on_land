@@ -6,7 +6,7 @@ contract DonateFunds {
     address payable owner;
     uint256 highestDonation;
     address payable  highestDonor;
-    
+    address payable[] charities;
 
     constructor(){
         owner = payable (msg.sender);
@@ -14,6 +14,28 @@ contract DonateFunds {
         highestDonation = 0;
 
     }
+
+    modifier restrictedAccessToOwner (){
+        require(msg.sender == owner, 'Only owner can call this method');
+        _;
+    }
+
+    modifier validateRecipient (address payable recipientAddress){
+        require(msg.sender != recipientAddress,'sender address cannot be recipient address');
+        _;
+    }
+
+    modifier validateAmountSent (){
+        require( msg.value > 0, 'amount to send has to be greater than 0');
+        _;
+    }
+
+
+    modifier validateAmountDonated (){
+        require( msg.value > 0, 'amount to donate has to be greater than 0');
+        _;
+    }
+
 
     event DonationReceived(
     
@@ -26,9 +48,9 @@ contract DonateFunds {
         uint256 _value
     );
 
-    function donate() public payable {
+    function donateToGeneralWallet() public validateAmountDonated() payable {
         uint256 donationAmount = msg.value;
-        owner.transfer(donationAmount);
+        owner.transfer(donationAmount); //can contract hold funds..
 
         emit DonationReceived(msg.sender, donationAmount);
 
@@ -39,17 +61,29 @@ contract DonateFunds {
         }
     }
 
+    function donateToSpecificCause() public payable {
+
+    }
+
+    function addCharityAddress() public {
+
+    }
+
+    function removeCharityAddress() public {
+        
+    }
+
     function getTotalDonations() view public returns(uint256){
         return totalDonationsAmount;
     }
 
-    function payOutDonations(address payable recipientAddress, uint256 donationAmount) public payable {
+    function payOutDonations(address payable recipientAddress, uint256 donationAmount) public validateAmountSent() validateRecipient(recipientAddress) payable {
         recipientAddress.transfer(donationAmount);
         emit DonationMade(recipientAddress, donationAmount);
     }
+
 }
 
 /* 
- TODO: add modifers fot type and condition safety
     : pass recipient address from cast_votes.sol
 */

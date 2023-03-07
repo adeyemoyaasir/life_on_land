@@ -13,6 +13,7 @@ contract cast_votes {
     struct  proposed_recipient {
         bytes32 name;
         uint voteCount;
+        address payable recipient_address;
     }
     
     address public chairperson;
@@ -22,20 +23,25 @@ contract cast_votes {
     //array of proposals
     proposed_recipient[] public proposals;
 
-
-    //creating ballot with the recipients to receive the funds
-    constructor(bytes32[] memory proposalNames) {
-        chairperson = msg.sender;
-        
-        for(uint i=0; i<proposalNames.length; i++){
-            proposals.push(proposed_recipient({
-                name: proposalNames[i],
-                voteCount: 0
-            }));
-        }
+     modifier limitAccessToOwner(){
+        require(chairperson == msg.sender,'function can only be called by chairperson');
+        _;
     }
 
-    //giving voters right to vote. require that voters be the only ones in original verified list
+    event proposalsAdded(
+        bool success,
+        proposed_recipient[] proposals
+
+    );
+
+
+    //creating ballot with the recipients to receive the funds
+    constructor() {
+        chairperson = msg.sender;       
+    }
+
+    //giving voters right to vote. chairperson currently has the power to select voters.
+    // This can be changed to something that uses a multisig wallet
 
     function giveVotingRight(address voter)  external {
         require(
@@ -49,6 +55,21 @@ contract cast_votes {
         require(voters[voter].weight == 0);
         voters[voter].weight = 1;
 
+    }
+
+    function addProposals(proposed_recipient[] memory proposals_Structs) public limitAccessToOwner() {
+
+        for(uint i=0; i<proposals_Structs.length; i++){
+            proposals.push(      
+                proposals_Structs[i]          
+            );
+        }
+
+        emit proposalsAdded(true, proposals);
+    }
+
+    function getArrayofProposals() public view returns( proposed_recipient[] memory){
+        return proposals;
     }
 
     function vote(uint proposal) external {
@@ -71,6 +92,12 @@ contract cast_votes {
 
     function winnerName() external view returns (bytes32 winnerName_){
         winnerName_ = proposals[winningProposal()].name;
+
+    }
+
+    function winnerAddress() external view returns (address winnerAddress_){
+        winnerAddress_=  proposals[winningProposal()].recipient_address;
+        
     }
 
 }
