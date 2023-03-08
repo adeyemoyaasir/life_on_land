@@ -8,6 +8,8 @@ import handsWater from './media/handsWater.svg'
 import handsHeart from './media/handsHeart.svg'
 import heart from './media/heart.svg'
 import people from './media/people.svg'
+import Goal from './goal'
+import Contribute from './contribute'
 
 const Home = () => {
   return (
@@ -35,7 +37,7 @@ const Home = () => {
             </div>
         </div>
     </div>
-    <div className="w-full h-[10%] bg-[#24527A] flex p-2 space-x-10 md:space-x-32 lg:space-x-80 shrink items-center justify-center">
+    <div className="w-full h-[10%] bg-[#5DACBD] border-[#E0EBEB] border-2 flex p-2 space-x-10 md:space-x-32 lg:space-x-80 shrink items-center justify-center">
         <img className='w-auto h-[80%]' src={handsWater} alt=''/>
         <img className='w-auto h-[80%] ' src={handsHeart} alt=''/>
         <img className='w-auto h-[80%] ' src={heart} alt=''/>
@@ -43,6 +45,11 @@ const Home = () => {
     </div>
     </div>
     <About/>
+    <Goal/>
+    <Contribute/>
+    <div className='w-full bg-[#24527A] h-24 justify-center items-center flex text-white font-Kanit'>
+         Copyright &copy; {new Date().getFullYear()} Life on land
+    </div>
     </>
   )
 }

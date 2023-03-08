@@ -9,7 +9,7 @@ export default function NavBar() {
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <a href="">
-                            <h2 className="text-2xl font-bold font-Kanit text-[#24527A] ">logo</h2>
+                            <h2 className="text-2xl font-bold font-Kanit text-[#24527A] ">l.o.ld</h2>
                         </a>
                         <div className="md:hidden">
                             <button
